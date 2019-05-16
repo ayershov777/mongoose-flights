@@ -1,2 +1,13 @@
-<%- include('header') %>
-<%- include('footer') %>
+<%- include('../header') %>
+<h1>Flights</h1>
+<ul>
+    <% flights.forEach(function(flight) { %>
+        <li>
+            <%= flight.airline %>
+            Flight #<%= flight.flightNo %>
+            <%= flight.departs %>
+        </li>
+    <% }); %>
+</ul>
+<a href="flights/new">create a new flight</a>
+<%- include('../footer') %>
