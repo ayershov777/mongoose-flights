@@ -6,3 +6,43 @@ body {
 a {
   color: #00B7FF;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr[onclick] > td:hover {
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.late {
+  color: red;
+}
+
+.flight-layout {
+  display: grid;
+  grid-template-columns: 256px auto;
+  padding-right: 256px;
+}
+
+.flight-layout p{
+  display: inline-block;
+  margin: 4px 8px;
+}
+
+.flight-layout h1 {
+  display: inline-block;
+  margin: 8px 0;
+}

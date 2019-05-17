@@ -1,2 +1,41 @@
-<%- include('header') %>
-<%- include('footer') %>
+<%- include('../header') %>
+<% 
+    var m = new moment(flight.departs);
+    var date = m.format('MMMM Do, YYYY');
+    var time = m.format('h:mm a');
+%>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+
+<div class="flight-layout">
+    <div>
+        <h1><%= flight.airline %> #<%= flight.flightNo %></h1><br>
+        <p>Departs from: <%= flight.airport %></p><br>
+        <p>Departure date: <%= date %></p><br>
+        <p>Departure time: <%= time %></p><br>
+    </div>
+    <table id='destinations' data-id="<%= flight._id %>">
+        <tr>
+            <th>Destination
+                <button id="add-destination">+</button>
+                <script src='/javascripts/addDestination.js'></script>
+            </th>
+            <th>Arrival Date</th>
+            <th>Time</th>
+        </tr>
+        <% flight.destinations.forEach(function(destination) {
+            m = new moment(destination.arrival);
+            date = m.format('MMMM Do, YYYY');
+            time = m.format('h:mm a');
+        %>
+            <tr>
+                <td><%= destination.airport %></td>
+                <td><%= date %></td>
+                <td><%= time %></td>
+            </tr>
+        <% }); %>
+    </table>
+</div>
+<%- include('../footer') %>

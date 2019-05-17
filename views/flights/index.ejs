@@ -1,13 +1,29 @@
 <%- include('../header') %>
-<h1>Flights</h1>
-<ul>
-    <% flights.forEach(function(flight) { %>
-        <li>
-            <%= flight.airline %>
-            Flight #<%= flight.flightNo %>
-            <%= flight.departs %>
-        </li>
+<h2>All Flights</h2>
+<table>
+    <tr>
+        <th>Airport</th>
+        <th>Airline</th>
+        <th>Flight No.</th>
+        <th>Departure Date</th>
+        <th>Time</th>
+    </tr>
+
+    <% flights.forEach(function(flight) {
+        var m = new moment(flight.departs);
+        var date = m.format('MMMM Do, YYYY');
+        var time = m.format('h:mm a');
+    %>
+        <tr class="<%= timeNow > flight.departs ? 'late' : 'on-time' %>"
+            onclick="location.href='flights/<%= flight._id %>';">
+            <td><%= flight.airport %></td>
+            <td><%= flight.airline %></td>
+            <td><%= flight.flightNo %></td>
+            <td><%= date %></td>
+            <td><%= time %></td>
+        </tr>
     <% }); %>
-</ul>
+
+</table>
 <a href="flights/new">create a new flight</a>
 <%- include('../footer') %>

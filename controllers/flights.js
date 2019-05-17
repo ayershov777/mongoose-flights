@@ -1,17 +1,21 @@
 const Flight = require('../models/flight');
+const moment = require('moment');
 
 module.exports = {
     index,
     new: newFlight,
-    create: createFlight
+    create: createFlight,
+    show: showFlight
 }
 
 function index(req, res) {
-    Flight.find({}, function(err, flights) {
+    Flight.find({}).sort('departs').exec(function(err, flights) {
         if(err) console.log(err);
         res.render('flights/index', {
             title: 'Flights list',
-            flights
+            flights,
+            moment,
+            timeNow: new Date(moment())
         });
     });
 }
@@ -38,5 +42,15 @@ function createFlight(req, res) {
         if(err)
             return res.redirect('flights/new');
         res.redirect('flights');
+    });
+}
+
+function showFlight(req, res) {
+    Flight.findById(req.params.id, function(err, flight) {
+        res.render('flights/show', {
+            title: `${flight.airline} Flight #${flight.flightNo}`,
+            flight,
+            moment
+        });
     });
 }
