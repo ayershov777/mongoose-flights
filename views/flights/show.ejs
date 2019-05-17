@@ -10,34 +10,73 @@
   crossorigin="anonymous"></script>
 
 <h2>Flight Information</h2>
-<div class="flight-layout">
-    <div>
-        <h1><%= flight.airline %> #<%= flight.flightNo %></h1><br>
-        <p>Departs from: <%= flight.airport %></p><br>
-        <p>Departure date: <%= date %></p><br>
-        <p>Departure time: <%= time %></p><br>
+<div class="main-content">
+    <div class="flight-layout">
+        <div>
+            <div class='flight-info'>
+                <h1><%= flight.airline %> #<%= flight.flightNo %></h1>
+                <p>Departs from: <%= flight.airport %></p>
+                <p>Departure date: <%= date %></p>
+                <p>Departure time: <%= time %></p><br>
+                <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
+                    <button id="delete-flight">Delete this flight</button>
+                </form>
+            </div>
+        </div>
+        <div> 
+            <h3>Seats</h3>
+            <div class="seats">
+                <table class="seats">
+                    <tr>
+                        <% for(let i=0; i<6; i++) { %>
+                            <th><%= String.fromCharCode(i+65) %></th>
+                        <% } %>
+                    </tr>
+                    <% for(let i=1; i<=99; i++) { %>
+                        <tr>
+                            <% for(let j=0; j<6; j++) { %>
+                                <td>
+                                    <% var val =  String.fromCharCode(j+65) + String(i)%>
+                                    <form action="/flights/<%= flight._id %>/tickets" method="POST">
+                                    <input type="submit"
+                                        class="<%= tickets[val] ? 'seat occupied' : 'seat vacant' %>"
+                                        value="<%= val %>"
+                                        name="seat">
+                                    </form>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </table>
+            </div>
+        </div>
+        <div class="destinations">
+            <h3>Destinations</h3>
+            <table id='destinations' class="destinations" data-id="<%= flight._id %>">
+                <tr>
+                    <th>Destination
+                        <button id="add-destination">+</button>
+                        <script src='/javascripts/addDestination.js'></script>
+                    </th>
+                    <th>Arrival Date</th>
+                    <th>Time</th>
+                    <th>Delete</th>
+                </tr>
+                <% flight.destinations.forEach(function(destination) {
+                    m = new moment(destination.arrival);
+                    date = m.format('MMMM Do, YYYY');
+                    time = m.format('h:mm a');
+                %>
+                    <tr>
+                        <td><%= destination.airport %></td>
+                        <td><%= date %></td>
+                        <td><%= time %></td>
+                        <td class="delete-flight"><button class="delete-flight">x</button></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
     </div>
-    <table id='destinations' data-id="<%= flight._id %>">
-        <tr>
-            <th>Destination
-                <button id="add-destination">+</button>
-                <script src='/javascripts/addDestination.js'></script>
-            </th>
-            <th>Arrival Date</th>
-            <th>Time</th>
-        </tr>
-        <% flight.destinations.forEach(function(destination) {
-            m = new moment(destination.arrival);
-            //console.log(m);
-            date = m.format('MMMM Do, YYYY');
-            time = m.format('h:mm a');
-        %>
-            <tr>
-                <td><%= destination.airport %></td>
-                <td><%= date %></td>
-                <td><%= time %></td>
-            </tr>
-        <% }); %>
-    </table>
 </div>
+<script src="/javascripts/addDestination.js"></script>
 <%- include('../footer') %>

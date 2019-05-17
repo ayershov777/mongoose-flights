@@ -1,28 +1,39 @@
 <%- include('../header') %>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+
 <h2>All Flights</h2>
-<table>
-    <tr>
-        <th>Airport</th>
-        <th>Airline</th>
-        <th>Flight No.</th>
-        <th>Departure Date</th>
-        <th>Time</th>
-    </tr>
-
-    <% flights.forEach(function(flight) {
-        var m = new moment(flight.departs);
-        var date = m.format('MMMM Do, YYYY');
-        var time = m.format('h:mm a');
-    %>
-        <tr class="<%= timeNow > flight.departs ? 'late' : 'on-time' %>"
-            onclick="location.href='flights/<%= flight._id %>';">
-            <td><%= flight.airport %></td>
-            <td><%= flight.airline %></td>
-            <td><%= flight.flightNo %></td>
-            <td><%= date %></td>
-            <td><%= time %></td>
+<div class="index-table-container">
+    <table class="all-flights">
+        <tr>
+            <th>Airport</th>
+            <th>Airline</th>
+            <th>Flight No.</th>
+            <th>Departure Date</th>
+            <th>Time</th>
+            <th>Delete</th>
         </tr>
-    <% }); %>
 
-</table>
+        <% flights.forEach(function(flight) {
+            var m = new moment(flight.departs);
+            var date = m.format('MMMM Do, YYYY');
+            var time = m.format('h:mm a');
+        %>
+            <tr class="<%= timeNow > flight.departs ? 'late' : 'on-time' %>">
+                <td class="redirect" data-id="<%= flight._id %>"><%= flight.airport %></td>
+                <td class="redirect" data-id="<%= flight._id %>"><%= flight.airline %></td>
+                <td class="redirect" data-id="<%= flight._id %>"><%= flight.flightNo %></td>
+                <td class="redirect" data-id="<%= flight._id %>"><%= date %></td>
+                <td class="redirect" data-id="<%= flight._id %>"><%= time %></td>
+                <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
+                    <td class="delete-flight"><button class="delete-flight">x</button></td>
+                </form>
+            </tr>
+        <% }); %>
+    </table>
+    <script src="/javascripts/clickTableData.js"></script>
+</div>
+<div class='center-container'><button onclick="location.href='/flights/new'">Add a new flight</button></div>
 <%- include('../footer') %>

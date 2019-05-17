@@ -27,14 +27,90 @@ nav > a:hover {
   color: white;
 }
 
-h2 {
+button:hover {
+  cursor: pointer;
+}
+
+h2, h3 {
   text-align: center;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+.main-content {
+  border: 2px solid #dddddd;
+  padding-bottom: 32px;
+}
+
+.index-table-container {
+  display: flex;
+  justify-content: center;
 }
 
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
+}
+
+table.all-flights {
+  width: 50%;
+}
+
+div.flight-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.seats {
+  margin-right: 32px;
+  overflow-y: auto;
+  height: 461px;
+}
+
+table.seats,
+table.destinations {
   width: 100%;
+}
+
+input.seat {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 8px;
+}
+
+input.vacant {
+  background-color: lightgreen;
+}
+
+input.vacant:hover {
+  cursor: pointer;
+}
+
+input.occupied {
+  background-color: indianred;
+}
+
+input.vacant {
+  background-color: lightgreen;
+}
+
+table.seats th,
+table.seats td {
+  text-align: center;
+}
+
+table.seats td {
+  padding: 0px;
+}
+
+th:last-child {
+  text-align: center;
 }
 
 td, th {
@@ -43,7 +119,7 @@ td, th {
   padding: 8px;
 }
 
-tr[onclick] > td:hover {
+td.redirect:hover {
   cursor: pointer;
 }
 
@@ -55,11 +131,26 @@ tr:nth-child(even) {
   color: red;
 }
 
+div.destinations {
+  margin-right: 32px;
+}
+
+td.delete-flight {
+  display: flex;
+  justify-content: center;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+
 .new-flight {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 25%;
+  width: 27%;
 }
 
 .new-flight input[type="submit"]{
@@ -69,8 +160,7 @@ tr:nth-child(even) {
 
 .flight-layout {
   display: grid;
-  grid-template-columns: 256px auto;
-  padding: 0 128px;
+  grid-template-columns: 256px 512px auto;
 }
 
 .flight-layout p{

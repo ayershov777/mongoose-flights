@@ -1,11 +1,13 @@
 const Flight = require('../models/flight');
+const Ticket = require('../models/ticket');
 const moment = require('moment');
 
 module.exports = {
     index,
     new: newFlight,
     create: createFlight,
-    show: showFlight
+    show: showFlight,
+    delete: deleteFlight
 }
 
 function index(req, res) {
@@ -47,10 +49,24 @@ function createFlight(req, res) {
 
 function showFlight(req, res) {
     Flight.findById(req.params.id, function(err, flight) {
-        res.render('flights/show', {
-            title: `${flight.airline} Flight #${flight.flightNo}`,
-            flight,
-            moment
+        Ticket.find({flight: flight._id}, function(err, tickets) {
+            var ticketTable = {};
+            tickets.forEach(function(ticket) {
+                ticketTable[`${ticket.seat}`] = ticket;
+            });
+            res.render('flights/show', {
+                title: `${flight.airline} Flight #${flight.flightNo}`,
+                flight,
+                moment,
+                tickets: ticketTable
+            });
         });
     });
+}
+
+function deleteFlight(req, res) {
+    Flight.deleteOne({_id: req.params.id}, function(err) {
+        if(err) console.log(err);
+    });
+    res.redirect('/flights');
 }
