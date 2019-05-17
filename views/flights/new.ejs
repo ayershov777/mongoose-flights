@@ -1,26 +1,25 @@
 <%- include('../header') %>
+<h2>New Flight</h2>
 <form action='/flights' method='POST'>
-    <label>Departs from
+    <div class="new-flight">
+        <p>Departs from</p>
         <select name="airport">
             <option value="AUS">AUS</option>
             <option value="DAL">DAL</option>
             <option value="LAX">LAX</option>
             <option value="SEA">SEA</option>
         </select>
-    </label><br>
-    <label>Airline: 
+        <p>Airline:</p>
         <select name="airline">
             <option value="American">American</option>
             <option value="Southwest">Southwest</option>
             <option value="United">United</option>
         </select>
-    </label><br>
-    <label>FlightNo:
+        <p>FlightNo:</p>
         <input type="text" pattern="\d\d+" required size="4" maxlength="4" name="flightNo">
-    </label><br>
-    <label>Departure: 
+        <p>Departure:</p>
         <input type="datetime-local" name="departs">
-    </label>
-    <input type="submit" value="Add flight">
+        <input type="submit" value="Add flight">
+    </div>
 </form>
 <%- include('../footer') %>

@@ -40,8 +40,8 @@ function createFlight(req, res) {
     var flight = new Flight(req.body);
     flight.save(function(err) {
         if(err)
-            return res.redirect('flights/new');
-        res.redirect('flights');
+            return res.redirect('/flights/new');
+        res.redirect('/flights');
     });
 }
 

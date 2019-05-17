@@ -1,10 +1,34 @@
 body {
-  padding: 50px;
+  padding: 0 50px 50px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  border: 2px solid #dddddd;
+  padding: 6px 16px;
+  margin-bottom: 16px;
+}
+
+nav > a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16pt;
+  padding: 10px;
+}
+
+nav > a:hover {
+  background-color: #ccccff;
+  color: white;
+}
+
+h2 {
+  text-align: center;
 }
 
 table {
@@ -31,10 +55,22 @@ tr:nth-child(even) {
   color: red;
 }
 
+.new-flight {
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 25%;
+}
+
+.new-flight input[type="submit"]{
+  grid-column: 1 / span 2;
+  margin: 16px auto;
+}
+
 .flight-layout {
   display: grid;
   grid-template-columns: 256px auto;
-  padding-right: 256px;
+  padding: 0 128px;
 }
 
 .flight-layout p{

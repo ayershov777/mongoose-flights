@@ -9,6 +9,7 @@
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
 
+<h2>Flight Information</h2>
 <div class="flight-layout">
     <div>
         <h1><%= flight.airline %> #<%= flight.flightNo %></h1><br>
@@ -27,6 +28,7 @@
         </tr>
         <% flight.destinations.forEach(function(destination) {
             m = new moment(destination.arrival);
+            //console.log(m);
             date = m.format('MMMM Do, YYYY');
             time = m.format('h:mm a');
         %>

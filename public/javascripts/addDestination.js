@@ -3,7 +3,7 @@ const $table = $('#destinations')
 
 const rowTemplate = `
 <tr id="add-row">
-    <form id="add-form" action="/flights/${$table.attr('data-id')}" method="POST">
+    <form id="add-form" action="/flights/${$table.attr('data-id')}/destinations" method="POST">
         <td>       
             <select name="airport" form="add-form">
                 <option value="AUS">AUS</option>
@@ -14,8 +14,8 @@ const rowTemplate = `
             <input type="submit" value="add" form="add-form">
             <button id="cancel">cancel</button>
         </td>
-        <td><input type="date" required form="add-form"></td>
-        <td><input type="time" required form="add-form"></td>
+        <td><input name="date" type="date" required form="add-form"></td>
+        <td><input name="time" type="time" required form="add-form"></td>
     </form>
 </tr>
 `
