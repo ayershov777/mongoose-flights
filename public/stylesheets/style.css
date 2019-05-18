@@ -76,28 +76,21 @@ table.destinations {
   width: 100%;
 }
 
-input.seat {
+div.seat {
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border: none;
   padding: 8px;
 }
 
-input.vacant {
-  background-color: lightgreen;
-}
-
-input.vacant:hover {
+div.seat:hover {
   cursor: pointer;
 }
 
-input.occupied {
-  background-color: indianred;
+div.vacant {
+  background-color: lightgreen;
 }
 
-input.vacant {
-  background-color: lightgreen;
+div.occupied {
+  background-color: indianred;
 }
 
 table.seats th,

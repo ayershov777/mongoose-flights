@@ -1,16 +1,26 @@
 const Ticket = require('../models/ticket');
 
 module.exports = {
-    addToFlight
+    create: createTicket,
+    delete: deleteTicket
 };
 
-function addToFlight(req, res) {
-    req.body.price = 0;
-    req.body.flight = req.params.id;
-    console.log(req.body);
-    ticket = new Ticket(req.body);
-    ticket.save(function(err) {
-        if(err) console.log(err);
-        res.redirect(`/flights/${req.params.id}`);
+function createTicket(req, res) {
+    Ticket.create(req.body, (err, ticket)=>{
+        if(err) res.send({
+            status: 'failure'
+        })
+        else res.send({
+            status: 'success',
+            ticketId: ticket._id,
+            price: ticket.price
+        });
+    });
+}
+
+function deleteTicket(req, res) {
+    Ticket.deleteOne({_id: req.params.id}, (err)=>{
+        if(err) res.send('error')
+        else res.send('success');
     });
 }
