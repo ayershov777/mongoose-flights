@@ -23,6 +23,7 @@ const rowTemplate = `
 $button.on('click', function() {
     const row = $(rowTemplate)[0];
     $table.append(row);
+    $(`option[value="${$table.attr("data-airport")}"]`).hide();
     $button.hide();
     $('#cancel').on('click', function() {
         $('#add-row').remove();

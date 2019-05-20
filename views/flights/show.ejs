@@ -54,7 +54,7 @@
         </div>
         <div class="destinations">
             <h3>Destinations</h3>
-            <table id='destinations' class="destinations" data-id="<%= flight._id %>">
+            <table id='destinations' class="destinations" data-id="<%= flight._id %>" data-airport="<%= flight.airport %>">
                 <tr>
                     <th>Destination
                         <button id="add-destination">+</button>
@@ -80,5 +80,5 @@
         </div>
     </div>
 </div>
-<script src="/javascripts/clickTableData.js"></script>
+<script src="/javascripts/clickSeat.js"></script>
 <%- include('../footer') %>
